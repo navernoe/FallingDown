@@ -7,6 +7,12 @@ p {
     font-family: 'Montserrat', sans-serif;
 }
 
+#tip {
+    height: 30px;
+    color: rgb(255, 123, 0);
+    text-align: center;
+}
+
 .startBtn {
     padding: 20px;
     margin: 20px auto;

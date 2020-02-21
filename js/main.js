@@ -56,6 +56,12 @@ $(document).ready(function(){
 		}
 	});
 
+	// скрываем подсказку
+    canvas.on('object:moving', function () {
+        $( "#tip p" ).text("");
+    });
+
+
 
 	let theMoon;
 
@@ -83,6 +89,7 @@ $(document).ready(function(){
 				// включаем кнопку обратно и выводим подсказку
 				$( "#startBtn" ).removeClass("disabled");
 				$( "#startBtn" ).click(() => startFall(theMoon));
+				$( "#tip p" ).text("Get the Moon UP and try again!");
 			}
 		});
 	};
