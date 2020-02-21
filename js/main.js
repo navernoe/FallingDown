@@ -63,7 +63,7 @@ $(document).ready(function(){
 
 
 
-	let theMoon;
+	let theMoon, groundLine;
 
 	fabric.Image.fromURL('img/theMoon.png', function (moonImg) {
 		theMoon = new fabric.Image(moonImg.getElement());
@@ -71,27 +71,34 @@ $(document).ready(function(){
 		theMoon.hasControls = false;
 		theMoon.scale(0.06);			
 		canvas.add(theMoon);
+		groundLine = canvas.height - (theMoon.height * theMoon.scaleY) - 20;
 		theMoon.center();
 	});
 
 
     const startFall = (moon) => {
 
-	    // отключаем кнопку во время анимации
-        $( "#startBtn" ).addClass("disabled");
-        $( "#startBtn" ).off("click");
+		const moonY = moon.top + (moon.scaleY * moon.height);
 
-		moon.animate('top', 400, {
-			duration: 2000,
-			onChange: canvas.renderAll.bind(canvas),
-			easing: fabric.util.ease.easeOutBounce,
-			onComplete: function() {
-				// включаем кнопку обратно и выводим подсказку
-				$( "#startBtn" ).removeClass("disabled");
-				$( "#startBtn" ).click(() => startFall(theMoon));
-				$( "#tip p" ).text("Get the Moon UP and try again!");
-			}
-		});
+		 // если луна над землей
+        if ( moonY < groundLine ) {
+			// отключаем кнопку во время анимации
+	        $( "#startBtn" ).addClass("disabled");
+	        $( "#startBtn" ).off("click");
+
+			moon.animate('top', 400, {
+				duration: 2000,
+				onChange: canvas.renderAll.bind(canvas),
+				easing: fabric.util.ease.easeOutBounce,
+				onComplete: function() {
+					// включаем кнопку обратно и выводим подсказку
+					$( "#startBtn" ).removeClass("disabled");
+					$( "#startBtn" ).click(() => startFall(theMoon));
+					$( "#tip p" ).text("Get the Moon UP and try again!");
+				}
+			});
+        }
+
 	};
 
 	$( "#startBtn" ).click(() => startFall(theMoon));
