@@ -70,10 +70,20 @@ $(document).ready(function(){
 
 
     const startFall = (moon) => {
+
+	    // отключаем кнопку во время анимации
+        $( "#startBtn" ).addClass("disabled");
+        $( "#startBtn" ).off("click");
+
 		moon.animate('top', 400, {
 			duration: 2000,
-		  	onChange: canvas.renderAll.bind(canvas),
-		  	easing: fabric.util.ease.easeOutBounce
+			onChange: canvas.renderAll.bind(canvas),
+			easing: fabric.util.ease.easeOutBounce,
+			onComplete: function() {
+				// включаем кнопку обратно и выводим подсказку
+				$( "#startBtn" ).removeClass("disabled");
+				$( "#startBtn" ).click(() => startFall(theMoon));
+			}
 		});
 	};
 
