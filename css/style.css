@@ -1,0 +1,34 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#startBtn {
+    padding: 20px;
+    margin: 20px auto;
+    position: relative;
+    color: rgb(115, 39, 196);
+    border: 2px solid rgb(115, 39, 196);
+    background: none;
+    width: 200px;
+    text-align: center;
+}
+
+#startBtn:hover {
+	cursor: pointer;
+	color: white;
+    background: rgb(115, 39, 196);
+  }
+
+ #startBtn p {
+ 	font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+ }
+
+.canvas-wrapper {
+	margin: auto;
+	width: 1280px;
+	position: relative;
+}
